@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>KnightRise Chess Coaching for Kids – Reach 1500 Rating</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;800&family=Nunito:wght@400;600;800&display=swap">
+<style>
+:root{--bg:#f6f1e3;--surf:#fffdf6;--ink:#14213d;--mut:#4d5670;--gold:#e0a526;--green:#4f7a55;--line:#e3dac0;--sq1:#efe6c8;--sq2:#6f9a6b;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1729;--surf:#17223b;--ink:#f3eedd;--mut:#aab3c8;--line:#2a3857;--sq1:#d9d0b0;--sq2:#5d8a5f}}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 Nunito,system-ui,sans-serif}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;line-height:1.15;margin:0 0 .5em}
+h2{font-size:clamp(1.7rem,4vw,2.4rem)}a{color:inherit}
+.w{max-width:1080px;margin:0 auto;padding:0 20px}section{padding:64px 0}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bg);border-bottom:1px solid var(--line)}
+nav .w{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-family:Fraunces,serif;font-weight:800;font-size:1.25rem;text-decoration:none}
+nav a.l{margin-left:18px;text-decoration:none;font-weight:600;font-size:.95rem}
+.btn{display:inline-block;background:var(--gold);color:#14213d;font-weight:800;padding:14px 26px;border-radius:12px;text-decoration:none;border:0;cursor:pointer;font:800 1rem Nunito,sans-serif;min-height:48px}
+.btn:hover{filter:brightness(1.06)}.btn.wa{background:#25d366}.btn.ghost{background:transparent;border:2px solid currentColor;color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.hero{background:#14213d;color:#f6f1e3;padding:56px 0 64px}
+.hero .w{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(2.2rem,5.5vw,3.6rem);font-weight:800}
+.hero p{color:#cfd5e6;max-width:520px}.hero .row{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.stats{display:flex;gap:24px;margin-top:28px;flex-wrap:wrap;color:#cfd5e6;font-size:.95rem}.stats b{display:block;color:var(--gold);font:800 1.5rem Fraunces,serif}
+.board{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));grid-template-rows:repeat(8,minmax(0,1fr));aspect-ratio:1;width:100%;max-width:420px;margin:auto;border:6px solid #e0a526;border-radius:8px;overflow:hidden}
+.board button{border:0;padding:0;margin:0;width:100%;height:100%;min-width:0;min-height:0;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:clamp(1.3rem,5vw,2.2rem);line-height:1;cursor:pointer;color:#111}
+.board .d{background:var(--sq2)}.board .li{background:var(--sq1)}.board .sel{outline:4px solid var(--gold);outline-offset:-4px}
+.board .wp{color:#fff;text-shadow:0 0 2px #000,0 0 2px #000,0 0 3px #000}
+#msg{text-align:center;margin-top:14px;font-weight:700;min-height:1.6em;color:var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:16px;padding:24px}
+.card .ic{font-size:2rem}.path .card{border-top:6px solid var(--green)}.path .card b{color:var(--green);font-size:1.1rem}
+.plans label{display:block;cursor:pointer}.plans input{position:absolute;opacity:0}
+.plans .card{height:100%;transition:border-color .15s,transform .15s}
+.plans input:checked+.card{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold);transform:translateY(-3px)}
+.plans input:focus-visible+.card{outline:3px solid var(--gold)}
+.price{font:800 1.9rem Fraunces,serif}.price small{font:600 .9rem Nunito;color:var(--mut)}
+.tag{display:inline-block;background:var(--gold);color:#14213d;font-weight:800;font-size:.8rem;padding:2px 10px;border-radius:99px}
+.card ul{padding-left:18px;margin:10px 0 0;color:var(--mut)}
+.pay{background:var(--surf);border:1px solid var(--line);border-radius:20px;padding:28px;margin-top:28px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.tabs button{padding:10px 16px;border-radius:99px;border:2px solid var(--line);background:transparent;color:var(--ink);font:700 .95rem Nunito;cursor:pointer;min-height:44px}
+.tabs button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.box{background:var(--bg);border-radius:12px;padding:16px;margin:12px 0}.num{font:800 1.4rem Fraunces,serif}
+input[type=text]{width:100%;padding:13px;border-radius:10px;border:2px solid var(--line);background:var(--bg);color:var(--ink);font:1rem Nunito;min-height:48px}
+.total{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-top:16px}
+details{background:var(--surf);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-bottom:10px}summary{font-weight:800;cursor:pointer}
+footer{background:#14213d;color:#cfd5e6;padding:36px 0;text-align:center;font-size:.95rem}
+.fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:20;background:#25d366;color:#fff;width:60px;height:60px;border-radius:50%;display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.3);text-decoration:none}
+.fab svg{width:32px;height:32px;fill:#fff}
+[hidden]{display:none!important}.pay label{display:block;font-weight:700;margin:12px 0 4px}.pay select,.pay textarea{width:100%;padding:13px;border-radius:10px;border:2px solid var(--line);background:var(--bg);color:var(--ink);font:1rem Nunito,sans-serif}fieldset.fs{border:2px solid var(--line);border-radius:10px;margin:12px 0 0}.fs legend{font-weight:700;padding:0 6px}.fs label{display:inline-block;font-weight:600;margin:6px 14px 6px 0}
+@media(max-width:780px){.hero .w{grid-template-columns:1fr}nav a.l{display:none}section{padding:48px 0}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<nav><div class="w"><a class="logo" href="#top">♞ KnightRise</a><div><a class="l" href="#path">Path to 1500</a><a class="l" href="#check">Free check-up</a><a class="l" href="#plans">Plans</a><a class="l" href="#faq">FAQ</a><a class="btn" style="padding:9px 18px;min-height:40px;margin-left:18px" href="#pay">Book &amp; pay</a></div></div></nav>
+
+<header class="hero" id="top"><div class="w">
+<div>
+<h1>Your child can play like a champion.</h1>
+<p>One-to-one online chess coaching for kids up to 14, for families in England, the UK, USA, Poland, Europe and Bangladesh. We build a clear path from first moves to a 1500 rating, with live classes, homework puzzles and tournament prep for national and international events.</p>
+<div class="row"><a class="btn wa" href="https://wa.me/8801717537617?text=Hello%2C%20I%20want%20to%20book%20a%20free%20chess%20assessment%20for%20my%20child." target="_blank" rel="noopener">Book free assessment on WhatsApp</a><a class="btn ghost" href="#plans">See plans</a></div>
+<div class="stats"><div><b>Ages 5–14</b>Beginner to advanced</div><div><b>1500</b>Rating goal</div><div><b>1-to-1</b>Live on Zoom</div></div>
+</div>
+<div><div class="board" id="board" aria-label="Chess puzzle board"></div><div id="msg" role="status">Try it: White to play and win in one move. Tap the rook, then its target.</div></div>
+</div></header>
+
+<section id="path"><div class="w">
+<h2>The road to 1500, level by level</h2>
+<p style="color:var(--mut);max-width:620px">Every student gets a plan based on their current level. We track progress with monthly rating checks and game reviews.</p>
+<div class="grid path" style="margin-top:24px">
+<div class="card"><b>Level 1 · Beginner (0–600)</b><ul><li>Moves, rules, checkmate patterns</li><li>Opening principles</li><li>Fun puzzle games</li></ul></div>
+<div class="card"><b>Level 2 · Club (600–1000)</b><ul><li>Tactics: forks, pins, skewers</li><li>Basic endgames</li><li>Own-game analysis</li></ul></div>
+<div class="card"><b>Level 3 · Tournament (1000–1300)</b><ul><li>Opening repertoire</li><li>Strategy and planning</li><li>Clock and online tournament practice</li></ul></div>
+<div class="card"><b>Level 4 · Rating 1500</b><ul><li>Deep calculation</li><li>Advanced endgames</li><li>National and international event prep</li></ul></div>
+</div></div></section>
+
+<section style="background:var(--surf)"><div class="w">
+<h2>Why parents choose us</h2>
+<div class="grid">
+<div class="card"><div class="ic">🎯</div><h3>Personal plan</h3>Lessons built around your child’s level, pace and goals.</div>
+<div class="card"><div class="ic">🏆</div><h3>Tournament ready</h3>Preparation for school, national and FIDE-rated events.</div>
+<div class="card"><div class="ic">📊</div><h3>Progress reports</h3>Monthly rating check and a short update for parents.</div>
+<div class="card"><div class="ic">🌍</div><h3>Learn from anywhere</h3>Online classes in English or Bangla, in your time zone.</div>
+</div></div></section>
+
+<section id="plans"><div class="w">
+<h2>Choose a plan</h2>
+<p style="color:var(--mut)">The first 20-minute assessment is free. Choose where you live to see prices in your currency, then pick a plan.</p>
+<div class="tabs" id="reg" role="group" aria-label="Your region"></div>
+<div class="grid plans" style="margin-top:20px" role="radiogroup" aria-label="Plans">
+<label><input type="radio" name="plan" value="Single Class" data-bdt="800" data-usd="12"><div class="card"><h3>Single class</h3><div class="price"></div><ul><li>1 live class (60 min)</li><li>Try before committing</li></ul></div></label>
+<label><input type="radio" name="plan" value="Monthly (8 classes)" data-bdt="5500" data-usd="60" checked><div class="card"><span class="tag">Most popular</span><h3>Monthly</h3><div class="price"></div><ul><li>8 live classes</li><li>Homework puzzles</li><li>Monthly progress report</li></ul></div></label>
+<label><input type="radio" name="plan" value="Rating Booster (3 months)" data-bdt="15000" data-usd="165"><div class="card"><h3>Rating booster</h3><div class="price"></div><ul><li>24 live classes</li><li>Tournament preparation</li><li>Save 10%</li></ul></div></label>
+</div>
+
+<div class="pay" id="pay">
+<h2 style="font-size:1.6rem">Pay in 3 easy steps</h2>
+<p style="margin:0;color:var(--mut)">1. Choose your plan above. 2. Pay with your preferred method. 3. Send us the receipt on WhatsApp and we confirm your class time.</p>
+<div class="tabs" role="group" aria-label="Payment method" id="tabs"></div>
+<div class="box" id="info"></div>
+<label for="nm" style="font-weight:700">Student’s name</label>
+<input type="text" id="nm" placeholder="e.g. Ayaan Rahman" autocomplete="name">
+<div class="total"><div>Total: <b class="num" id="tot"></b></div>
+<a class="btn wa" id="send" href="#" target="_blank" rel="noopener">Send payment receipt on WhatsApp</a></div>
+</div></div></section>
+
+<section id='check'><div class='w'><h2>Free student check-up</h2><p style='color:var(--mut);max-width:640px'>Every student can use these tools for free. Find your weak points, get a suggestion, share a game for review and practise tactics by clicking the board.</p><div class='tabs' id='ct' role='group' aria-label='Check-up tools'><button data-p='p1' aria-pressed='true'>Skill check-up</button><button data-p='p2' aria-pressed='false'>Game analysis</button><button data-p='p3' aria-pressed='false'>Tactics trainer</button></div>
+<div class='pay' id='p1' style='margin-top:0'><p style='margin-top:0'>Rate each skill from 1 (need help) to 5 (strong).</p><div class='grid' id='sk' style='grid-template-columns:repeat(auto-fit,minmax(220px,1fr))'></div><button class='btn' id='skb' style='margin-top:18px'>Show my weak points</button><div id='skr' aria-live='polite'></div></div>
+<div class='pay' id='p2' style='margin-top:0' hidden><p style='margin-top:0'>Paste the link of a game you played on Lichess or Chess.com. Your coach reviews it and replies with suggestions.</p><label for='gn1'>Student’s name</label><input type='text' id='gn1' placeholder='e.g. Ayaan Rahman'><label for='gl'>Game link</label><input type='text' id='gl' placeholder='https://lichess.org/...'><label for='gr'>Result</label><select id='gr'><option>Win</option><option>Loss</option><option>Draw</option></select><fieldset class='fs'><legend>Where did it go wrong?</legend><label><input type='checkbox' value='Opening'> Opening</label><label><input type='checkbox' value='Missed a tactic'> Missed a tactic</label><label><input type='checkbox' value='Blunder'> Blunder</label><label><input type='checkbox' value='Ran out of time'> Ran out of time</label><label><input type='checkbox' value='Endgame'> Endgame</label><label><input type='checkbox' value='Not sure'> Not sure</label></fieldset><label for='gn'>What do you want help with?</label><textarea id='gn' rows='3' placeholder='e.g. I lose my queen early'></textarea><div class='total'><a class='btn wa' id='gsend' href='#' target='_blank' rel='noopener'>Send game to coach on WhatsApp</a><a class='btn ghost' href='https://lichess.org/paste' target='_blank' rel='noopener'>Analyse free on Lichess</a></div></div>
+<div class='pay' id='p3' style='margin-top:0' hidden><b id='pzt'></b><div class='board' id='pb' style='margin-top:12px'></div><div id='pm' role='status' style='text-align:center;margin-top:12px;font-weight:700;min-height:3em;color:var(--green)'></div><div class='total' style='justify-content:center'><span id='ps'></span><button class='btn' id='pn'>Next puzzle</button></div></div>
+</div></section>
+
+<section><div class="w"><h2>Class times that fit your country</h2><p style="color:var(--mut)">Pick a time in the UK and see what it is for your family today. Differences shift by an hour when clocks change.</p><label for="th" style="font-weight:700">UK time </label><select id="th" style="padding:10px;border-radius:10px;border:2px solid var(--line);background:var(--surf);color:var(--ink);font:1rem Nunito;min-height:44px"></select><div class="grid" id="tz" style="margin-top:18px"></div></div></section>
+
+<section id="faq" style="background:var(--surf)"><div class="w" style="max-width:760px">
+<h2>Questions parents ask</h2>
+<details><summary>My child has never played. Is that fine?</summary><p>Yes. We start from the first move and keep lessons playful for young children.</p></details>
+<details><summary>How long to reach 1500?</summary><p>It depends on age, practice time and starting level. After the free assessment we give a realistic timeline.</p></details>
+<details><summary>What do we need for class?</summary><p>A phone, tablet or computer with internet, Zoom, and a free chess.com or lichess account.</p></details>
+<details><summary>Can I pay from the UK, USA, Poland or Europe?</summary><p>Yes. Choose your region in the plans section. Pay in £, $, zł or € by bank transfer, PayPal, Wise, Revolut, Zelle, Venmo or BLIK. Message us on WhatsApp and we send the details for your method.</p></details>
+<details><summary>Are classes held at times that suit my country?</summary><p>Yes. We teach evenings and weekends in UK, Poland and US time zones. Use the time converter above.</p></details>
+</div></section>
+
+<footer><div class="w"><b style="color:#f6f1e3;font-family:Fraunces,serif;font-size:1.2rem">♞ KnightRise Chess Coaching</b><p>WhatsApp / Call: <a href="https://wa.me/8801717537617">+880 1717 537617</a></p><p>Online coaching for families in England, the UK, USA, Poland and across Europe.</p><p>© 2026 KnightRise. All rights reserved.</p></div></footer>
+
+<a class="fab" href="https://wa.me/8801717537617?text=Hello%2C%20I%20have%20a%20question%20about%20chess%20classes." target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg viewBox="0 0 32 32"><path d="M16 3a13 13 0 0 0-11 19.8L3 29l6.4-2A13 13 0 1 0 16 3zm0 2.4a10.6 10.6 0 1 1-5.6 19.6l-.4-.2-3.8 1.2 1.2-3.7-.3-.4A10.6 10.6 0 0 1 16 5.4zm-4 5.2c-.3 0-.7.1-1 .5-.4.4-1.3 1.3-1.3 3.1s1.3 3.6 1.5 3.8c.2.3 2.6 4.1 6.4 5.6 3.1 1.2 3.7 1 4.4.9.7-.1 2.2-.9 2.5-1.8.3-.9.3-1.6.2-1.8-.1-.2-.4-.3-.8-.5l-2.4-1.2c-.3-.1-.6-.2-.8.2l-1.1 1.4c-.2.2-.4.3-.7.1-.4-.2-1.5-.6-2.9-1.8-1.1-1-1.8-2.200-2-2.500-.2-.4 0-.6.2-.8l.6-.7c.2-.2.2-.4.4-.6.1-.3.1-.5 0-.7l-1.1-2.700c-.3-.7-.6-.6-.8-.6z"/></svg></a>
+
+<script>
+var NUM="+880 1717 537617";
+var REG={
+ BD:{n:"Bangladesh ৳",c:"৳",p:[800,5500,15000],m:["bKash","Nagad","Rocket","Bank / Card"]},
+ UK:{n:"UK & England £",c:"£",p:[10,48,135],m:["Bank transfer","PayPal","Wise","Revolut"]},
+ US:{n:"USA $",c:"$",p:[12,60,165],m:["PayPal","Zelle","Venmo","Wise"]},
+ PL:{n:"Poland zł",c:"zł",p:[50,240,670],m:["BLIK","Revolut","Wise","PayPal"]},
+ EU:{n:"Europe €",c:"€",p:[12,56,155],m:["Bank transfer (SEPA)","PayPal","Wise","Revolut"]}
+};
+var key="UK";
+try{var tz=Intl.DateTimeFormat().resolvedOptions().timeZone||"";if(tz==="Asia/Dhaka")key="BD";else if(tz==="Europe/Warsaw")key="PL";else if(tz.indexOf("America/")===0)key="US";else if(tz.indexOf("Europe/")===0&&tz!=="Europe/London")key="EU";}catch(e){}
+var cur=REG[key].m[0];
+var lab=["per class","per month · 8 classes","for 3 months · 24 classes"];
+function fmt(r,v){var s=v.toLocaleString("en-US");return r.c==="zł"?s+" zł":r.c+s}
+var radios=document.querySelectorAll('input[name=plan]');
+function plan(){return document.querySelector('input[name=plan]:checked')}
+function render(){
+ var r=REG[key],p=plan(),ci=Array.prototype.indexOf.call(radios,p);
+ var USD=[12,60,165],us=key==="US";
+ document.querySelectorAll('.price').forEach(function(e,i){e.innerHTML=fmt(r,r.p[i])+" <small>"+(us?"":"≈ $"+USD[i]+" · ")+lab[i]+"</small>"});
+ var total=fmt(r,r.p[ci])+(us?"":" (≈ $"+USD[ci]+")");
+ document.getElementById('tot').textContent=total;
+ var info;
+ if(key==="BD"&&cur==="bKash"||key==="BD"&&cur==="Nagad")info="Open "+cur+" → Send Money → enter <span class='num'>"+NUM+"</span> → enter the total amount.";
+ else if(key==="BD"&&cur==="Rocket")info="Dial *322# or open Rocket → Send Money → enter <span class='num'>"+NUM+"</span>.";
+ else info="Tap the WhatsApp button below. We will send our "+cur+" payment details for <b>"+total+"</b>. Pay, then send us the receipt.";
+ document.getElementById('info').innerHTML=info;
+ var name=document.getElementById('nm').value.trim()||"(student name)";
+ var t="Hello! I want to pay for the "+p.value+" plan ("+total+") via "+cur+". Region: "+r.n+". Student: "+name+".";
+ document.getElementById('send').href="https://wa.me/8801717537617?text="+encodeURIComponent(t);
+ document.querySelectorAll('#tabs button').forEach(function(b){b.setAttribute('aria-pressed',b.textContent===cur)});
+ document.querySelectorAll('#reg button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.k===key)});
+}
+var tb=document.getElementById('tabs');
+function buildTabs(){tb.innerHTML="";REG[key].m.forEach(function(k){var b=document.createElement('button');b.textContent=k;b.onclick=function(){cur=k;render()};tb.appendChild(b)})}
+var rg=document.getElementById('reg');
+Object.keys(REG).forEach(function(k){var b=document.createElement('button');b.textContent=REG[k].n;b.dataset.k=k;b.onclick=function(){key=k;cur=REG[k].m[0];buildTabs();render()};rg.appendChild(b)});
+radios.forEach(function(i){i.onchange=render});
+document.getElementById('nm').oninput=render;buildTabs();render();
+
+/* Time converter */
+var ZN=[["UK / England","Europe/London"],["Poland","Europe/Warsaw"],["USA East","America/New_York"],["USA West","America/Los_Angeles"],["Bangladesh","Asia/Dhaka"]];
+var th=document.getElementById('th');
+for(var h=7;h<=21;h++){var o=document.createElement('option');o.value=h;o.textContent=(h%12||12)+":00 "+(h<12?"am":"pm");if(h===17)o.selected=true;th.appendChild(o)}
+function tzr(){
+ var now=new Date(),lh=+new Intl.DateTimeFormat('en-GB',{hour:'numeric',hour12:false,timeZone:'Europe/London'}).format(now)%24;
+ var t=new Date(now.getTime()+(+th.value-lh)*3600000);
+ document.getElementById('tz').innerHTML=ZN.map(function(z){return "<div class='card'><b>"+z[0]+"</b><div class='num'>"+new Intl.DateTimeFormat('en-US',{weekday:'short',hour:'numeric',hour12:true,timeZone:z[1]}).format(t)+"</div></div>"}).join("");
+}
+th.onchange=tzr;tzr();
+
+/* Free check-up tools */
+(function(){
+function wa(t){return "https://wa.me/8801717537617?text="+encodeURIComponent(t)}
+var $=function(i){return document.getElementById(i)};
+document.querySelectorAll('#ct button').forEach(function(bt){bt.onclick=function(){
+ document.querySelectorAll('#ct button').forEach(function(x){x.setAttribute('aria-pressed',x===bt);$(x.dataset.p).hidden=x!==bt})}});
+var S=[["Rules and checkmates","Practise basic mates (king+queen, king+rook) until they feel easy."],
+["Opening principles","Follow three rules: fight for the centre, develop knights and bishops, castle early."],
+["Tactics (forks, pins, skewers)","Solve puzzles every day. Start with the Tactics trainer on this page."],
+["Endgames","Learn king and pawn endings first. They decide many games."],
+["Calculating ahead","Before each move ask: what does my opponent threaten after this?"],
+["Checking for blunders","Use a checklist before moving: checks, captures, threats."],
+["Time management","Play 10+5 games and spend more time on the critical moves."],
+["Strategy and planning","Find your worst-placed piece and improve it."]];
+S.forEach(function(s,i){var l=document.createElement('label');l.textContent=s[0];var e=document.createElement('select');e.id='s'+i;for(var v=1;v<=5;v++){var o=document.createElement('option');o.value=v;o.textContent=v;if(v===3)o.selected=true;e.appendChild(o)}l.appendChild(e);$('sk').appendChild(l)});
+$('skb').onclick=function(){
+ var r=S.map(function(s,i){return{n:s[0],t:s[1],v:+$('s'+i).value,i:i}});
+ var srt=r.slice().sort(function(a,b){return a.v-b.v||a.i-b.i});
+ var weak=srt.slice(0,3),best=srt[srt.length-1],h="";
+ weak.forEach(function(w){h+="<div class='box'><b>Weak point: "+w.n+"</b> ("+w.v+"/5)<br>Suggestion: "+w.t+"</div>"});
+ h+="<p>Strongest area: <b>"+best.n+"</b> ("+best.v+"/5). Build your games around it.</p>";
+ var msg="Hello! My chess check-up: "+r.map(function(x){return x.n+" "+x.v+"/5"}).join(", ")+". Please suggest a study plan.";
+ h+="<a class='btn wa' target='_blank' rel='noopener' href='"+wa(msg)+"'>Send my result to the coach</a>";
+ $('skr').innerHTML=h};
+function gl(){var c=[].slice.call(document.querySelectorAll('#p2 .fs input:checked')).map(function(x){return x.value}).join(", ")||"not sure";
+ var t="Hello! Please review my game. Student: "+($('gn1').value.trim()||"(name)")+". Link: "+($('gl').value.trim()||"(paste link)")+". Result: "+$('gr').value+". Problems: "+c+". Help wanted: "+($('gn').value.trim()||"general advice")+".";
+ $('gsend').href=wa(t)}
+document.querySelectorAll('#p2 input,#p2 select,#p2 textarea').forEach(function(e){e.oninput=gl;e.onchange=gl});gl();
+var P=[["Mate in 1: back-rank mate","6k1/5ppp/8/8/8/8/8/R5K1","a1","a8","The king is trapped behind its own pawns. Use the rook."],
+["Mate in 1: scholar’s mate","r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR","h5","f7","The bishop on c4 guards f7."],
+["Win the queen: knight fork","6k1/5ppp/2q5/3N4/8/8/8/6K1","d5","e7","Give check and attack the queen with one move."],
+["Mate in 1: queen and king","7k/8/6K1/8/8/8/8/Q7","a1","a8","Your king already controls the escape squares."]];
+var W={R:"♖",N:"♘",B:"♗",Q:"♕",K:"♔",P:"♙"},K={r:"♜",n:"♞",b:"♝",q:"♛",k:"♚",p:"♟"};
+var i=0,sl=null,ok=false,sc=0,ps={},bd=$('pb');
+function ld(){ps={};sl=null;ok=false;P[i][1].split("/").forEach(function(row,ri){var c=0;row.split("").forEach(function(ch){if(/\d/.test(ch))c+=+ch;else{ps["abcdefgh"[c]+(8-ri)]=ch;c++}})});
+ $('pzt').textContent="Puzzle "+(i+1)+" of "+P.length+": "+P[i][0];$('pm').textContent="White to move. Click a white piece, then click where it goes.";$('ps').textContent="Solved: "+sc+" / "+P.length;dr()}
+function dr(){bd.innerHTML="";for(var r=8;r>=1;r--)for(var c=0;c<8;c++){var id="abcdefgh"[c]+r,p=ps[id],s=document.createElement('button');
+ s.className=((r+c)%2?"li":"d")+(sl===id?" sel":"")+(p&&p===p.toUpperCase()?" wp":"");
+ s.textContent=p?(p===p.toUpperCase()?W[p]:K[p]):"";s.setAttribute('aria-label',id+(p?" piece":""));
+ s.onclick=(function(x){return function(){ck(x)}})(id);bd.appendChild(s)}}
+function ck(id){if(ok)return;var p=ps[id];
+ if(p&&p===p.toUpperCase()){sl=id;dr();return}
+ if(!sl)return;
+ if(sl===P[i][2]&&id===P[i][3]){ps[id]=ps[sl];delete ps[sl];sl=null;ok=true;sc++;dr();$('ps').textContent="Solved: "+sc+" / "+P.length;
+  $('pm').textContent=sc===P.length?"Correct! All puzzles solved. Book a class to learn more.":"Correct! Well done. Click Next puzzle."}
+ else{sl=null;dr();$('pm').textContent="Not quite. Hint: "+P[i][4]}}
+$('pn').onclick=function(){i=(i+1)%P.length;if(i===0)sc=0;ld()};
+ld();
+})();
+
+/* Mate-in-one puzzle: Ra1 to a8 */
+var pos={a1:"♖",g1:"♔",g8:"♚",f7:"♟",g7:"♟",h7:"♟"},white={a1:1,g1:1};
+var b=document.getElementById('board'),sel=null,done=false,msg=document.getElementById('msg');
+function draw(){b.innerHTML="";for(var r=8;r>=1;r--)for(var c=0;c<8;c++){
+ var id="abcdefgh"[c]+r,s=document.createElement('button');
+ s.className=((r+c)%2?"li":"d")+(sel===id?" sel":"")+(white[id]?" wp":"");
+ s.textContent=pos[id]||"";s.setAttribute('aria-label',id+(pos[id]?" piece":""));
+ s.onclick=(function(i){return function(){click(i)}})(id);b.appendChild(s)}}
+function click(id){
+ if(done)return;
+ if(!sel){if(id==="a1"){sel=id;draw()}return}
+ if(id==="a8"){delete pos.a1;delete white.a1;pos.a8="♖";white.a8=1;done=true;sel=null;draw();
+  msg.textContent="Checkmate! Great eye. Imagine what you could learn in 3 months."}
+ else{sel=null;msg.textContent="Not quite. Look for a square where the king has no escape.";draw()}}
+draw();
+</script>
+</body>
+</html>
